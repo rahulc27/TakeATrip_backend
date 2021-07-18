@@ -24,6 +24,16 @@ public class Destination {
 	private float flightCharge;
 	private float chargePerPerson;
 	private float discount;
+	private int noOfNights;
+	
+	public int getNoOfNights() {
+		return noOfNights;
+	}
+
+	public void setNoOfNights(int noOfNights) {
+		this.noOfNights = noOfNights;
+	}
+
 	private int availability;
 	
 	@OneToOne(cascade = CascadeType.ALL)
