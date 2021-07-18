@@ -1,9 +1,14 @@
 package com.project.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.project.dto.UserDTO;
@@ -20,8 +25,18 @@ public class User {
 	private String contactNumber;
 	private String password;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private Set<Booking> listOfBooking;
+	
 	public Integer getUserId() {
 		return userId;
+	}
+	public Set<Booking> getListOfBooking() {
+		return listOfBooking;
+	}
+	public void setListOfBooking(Set<Booking> listOfBooking) {
+		this.listOfBooking = listOfBooking;
 	}
 	public void setUserId(Integer userId) {
 		this.userId = userId;

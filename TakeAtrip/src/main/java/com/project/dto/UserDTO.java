@@ -1,5 +1,7 @@
 package com.project.dto;
 
+import java.util.Set;
+
 import com.project.entity.User;
 
 public class UserDTO {
@@ -9,8 +11,15 @@ public class UserDTO {
 	private String emailId;
 	private String contactNumber;
 	private String password;
+	private Set<BookingDTO> bookingList;
 	
 	
+	public Set<BookingDTO> getBookingList() {
+		return bookingList;
+	}
+	public void setBookingList(Set<BookingDTO> bookingList) {
+		this.bookingList = bookingList;
+	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -45,10 +54,12 @@ public class UserDTO {
 	public User userDtoToEntity() {
 		User user = new User();
 		
+		
 		user.setContactNumber(this.contactNumber);
 		user.setEmailId(this.emailId);
 		user.setPassword(this.password);
 		user.setUserName(this.userName);
+		
 		
 		return user;
 	}
