@@ -44,4 +44,19 @@ public class DestinationApi {
 		}
 	}
 	
+	@GetMapping(value = "/DiscountPackages")
+	public ResponseEntity<List<DestinationDTO>> getDestinationByDiscount() throws TakATripException{
+		try {
+			
+			List<DestinationDTO> destList = destinationService.getDestinationByDiscount();
+			
+			ResponseEntity<List<DestinationDTO>> response = new ResponseEntity<List<DestinationDTO>>(destList, HttpStatus.OK);
+			
+			return response;
+			
+		}
+		catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, environment.getProperty(e.getMessage()), e);
+		}
+	}
 }

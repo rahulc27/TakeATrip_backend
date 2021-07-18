@@ -13,4 +13,6 @@ public interface DestinationRepository extends CrudRepository<Destination, Strin
 	
 	@Query("select p from Destination p where p.destinationName LIKE %:continent% OR p.continent LIKE %:continent%")
 	public List<Destination> finfByContinentIgnoreCase(@Param("continent") String continent) throws TakATripException;
+	
+	public List<Destination> findByDiscountGreaterThanEqual(float discount) throws TakATripException;
 }

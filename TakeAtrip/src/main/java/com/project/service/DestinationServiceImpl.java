@@ -78,5 +78,60 @@ public class DestinationServiceImpl implements DestinationService{
 		return destinationDtoList;
 	}
 	
+	@Override
+	public List<DestinationDTO> getDestinationByDiscount() throws TakATripException{
+		
+
+		List<Destination> destinationList = destinationRepository.findByDiscountGreaterThanEqual(1);
+		
+		List<DestinationDTO> destinationDtoList = new ArrayList<>();
+		
+		if(destinationList.isEmpty()) {
+			throw new TakATripException("DestinationService.NO_DISCOUNT");
+		}else {
+			
+			for(Destination dest: destinationList) {
+				
+				DestinationDTO destinationDto = new DestinationDTO();
+				
+				destinationDto.setDestinationId(dest.getDestinationId());
+				destinationDto.setAvailability(dest.getAvailability());
+				destinationDto.setChargePerPerson(dest.getChargePerPerson());
+				destinationDto.setContinent(dest.getContinent());
+				destinationDto.setDestinationName(dest.getDestinationName());
+				destinationDto.setDiscount(dest.getDiscount());
+				destinationDto.setFlightCharge(dest.getFlightCharge());
+				destinationDto.setImageUrl(dest.getImageUrl());
+				destinationDto.setNoOfNights(dest.getNoOfNights());
+				
+				DetailsDTO detailsDto = new DetailsDTO();
+				Details details = dest.getDetails();
+				
+				detailsDto.setDetailsId(details.getDetailsId());
+				detailsDto.setAbout(details.getAbout());
+				detailsDto.setHighlights(details.getHighlights());
+				detailsDto.setPace(details.getAbout());
+				detailsDto.setPackageInclusion(details.getPackageInclusion());
+				
+				ItineraryDTO itineraryDto = new ItineraryDTO();
+				Itinerary itinerary = details.getIntinerary();
+				
+				itineraryDto.setItineraryId(itinerary.getItineraryId());
+				itineraryDto.setFirstDay(itinerary.getFirstDay());
+				itineraryDto.setRestOfDays(itinerary.getRestOfDays());
+				itineraryDto.setLastDay(itinerary.getLastDay());
+				
+				detailsDto.setIntineraryDTO(itineraryDto);
+				
+				destinationDto.setDetailsDTO(detailsDto);
+				
+				destinationDtoList.add(destinationDto);
+				
+			}
+		}
+		
+		return destinationDtoList;
+	}
+	
 
 }

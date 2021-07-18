@@ -9,4 +9,6 @@ public interface DestinationService {
 	
 	public List<DestinationDTO> getDestinationBySearch(String continent) throws TakATripException;
 	
+	public List<DestinationDTO> getDestinationByDiscount() throws TakATripException;
+	
 }
