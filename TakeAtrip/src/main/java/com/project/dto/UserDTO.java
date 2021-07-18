@@ -2,15 +2,33 @@ package com.project.dto;
 
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.project.entity.User;
 
 public class UserDTO {
 	
 	private Integer userId;
+	
+	@Pattern(regexp = "([A-Za-z])+(\\s[A-Za-z]+)*", message = "Invalid user name Format.")
 	private String userName;
+	
+	@NotNull(message = "Email required.")
+	@Pattern(regexp = "[A-z0-9._]+@[A-z]{2,}\\.[A-z][A-z.]+", message = "Invalid email format.")
 	private String emailId;
+	
+	@NotNull(message = "contact Number Require.")
+	@Pattern(regexp = "[6-9][0-9]{9}", message = "Invalid Contact Number Format.")
 	private String contactNumber;
+	
+	@NotNull(message = "password required")
+	@Pattern(regexp = ".*[A-Z]+.*", message = "Uppercase character required.")
+	@Pattern(regexp = ".*[0-9]+.*", message = "Numeric character required.")
+	@Pattern(regexp = ".*[a-z]+.*", message = "Lowwercase character required.")
+	@Pattern(regexp = ".*[!@#$%^&*]+.*", message = "Special character required.")
 	private String password;
+	
 	private Set<BookingDTO> bookingList;
 	
 	

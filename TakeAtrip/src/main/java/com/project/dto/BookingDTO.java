@@ -2,18 +2,36 @@ package com.project.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 
 
 public class BookingDTO {
 
 	private Integer bookingId;
+	
+	@NotNull(message = "check in date required.")
+	@Future(message = "Make sure check in date greater than current date.")
 	private LocalDate checkIn;
+	
+	@NotNull(message = "check out date required.")
+	@Future(message = "Make sure check out date greater than current date.")
 	private LocalDate checkOut;
+	
+	@NotNull(message = "number of people required.")
+	@Min(value = 1, message = "Number of people must be greater than 0.")
+	@Max(value = 5, message = "number of peoples must not be greater than 5.")
 	private Integer noOfPeople;
+	
+	@NotNull(message = "Total cost required.")
 	private float totalCost;
+	
 	private LocalDateTime timeOfBooking = LocalDateTime.now();
 	
+	@NotNull(message = "Destination Required.")
 	private UserDTO userDTO;
 	
 	private DestinationDTO destinationDTO;
